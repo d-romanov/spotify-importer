@@ -1,0 +1,35 @@
+parser:
+  txt:
+    delimiter: "-"
+
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          spotify:
+            authorization-uri: https://accounts.spotify.com/authorize
+            token-uri: https://accounts.spotify.com/api/token
+            user-info-uri: https://api.spotify.com/v1/me
+            user-name-attribute: id
+        registration:
+          spotify:
+            client-id: ${CLIENT_ID}
+            client-secret: ${CLIENT_SECRET}
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/code/spotify
+            scope:
+              - user-library-modify
+              - user-read-private
+              - user-read-email
+              - playlist-read-private
+              - playlist-modify-private
+  servlet:
+    multipart:
+      max-file-size: 5MB
+
+logging:
+  level:
+    root: INFO
+    com:
+      github: DEBUG
